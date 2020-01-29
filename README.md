@@ -29,11 +29,12 @@ Breaks:
   - Default Props
   - State
   - State Hook
-  - Effect Hook
 - Day 2
-  - Composition (including containment + specialization)
-  - Unit Testing
-  - Other React Topics as Time Permits
+  - Composition
+  - Class-based Components
+  - Lifecycle Methods
+  - Other Hooks
+  - Other React Topics
 
 ### Requirements
 
