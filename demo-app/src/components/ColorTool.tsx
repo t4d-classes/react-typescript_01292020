@@ -1,6 +1,14 @@
 import React from 'react';
 
+import { Color } from '../models/color';
+
 export const ColorTool = () => {
+
+  const colors: Color[] = [
+    { id: 1, name: 'blue', hexcode: '0000FF' },
+    { id: 2, name: 'yellow', hexcode: '00FFFF' },
+    { id: 3, name: 'red', hexcode: 'FF0000' },
+  ];
 
   return (
     <>
@@ -8,9 +16,7 @@ export const ColorTool = () => {
         <h1>Color Tool</h1>
       </header>
       <ul>
-        <li>blue</li>
-        <li>yellow</li>
-        <li>red</li>
+        {colors.map(c => <li key={c.id}>{c.name}</li>)}
       </ul>
     </>
   );
