@@ -20,6 +20,7 @@ const initialColorForm: () => ColorFormState = () => ({
 export const ColorTool: FC<ColorToolProps> = (props) => {
 
   const [ colorForm, setColorForm ] = useState(initialColorForm());
+  const [ colors, setColors ] = useState(props.colors.concat());
 
   const change = (e: React.ChangeEvent<HTMLInputElement>) => {
     setColorForm({
@@ -28,8 +29,16 @@ export const ColorTool: FC<ColorToolProps> = (props) => {
     })
   };
 
-  console.log('component rendering');
-  console.log(colorForm);
+  const appendColor = () => {
+
+    setColors(colors.concat({
+      ...colorForm,
+      id: Math.max(...colors.map(c => c.id) as [], 0) + 1,
+    }));
+
+    setColorForm(initialColorForm());
+  };
+
 
   return (
     <>
@@ -37,7 +46,7 @@ export const ColorTool: FC<ColorToolProps> = (props) => {
         <h1>Color Tool</h1>
       </header>
       <ul>
-        {props.colors.map(c => <li key={c.id}>{c.name}</li>)}
+        {colors.map(c => <li key={c.id}>{c.name}</li>)}
       </ul>
       <form>
         <div>
@@ -48,6 +57,8 @@ export const ColorTool: FC<ColorToolProps> = (props) => {
           <label htmlFor="hexcode-input">Hexcode</label>
           <input type="text" id="hexcode-input" value={colorForm.hexcode} name="hexcode" onChange={change} />
         </div>
+
+        <button type="button" onClick={appendColor}>Add Color</button>
       </form>
     </>
   );
