@@ -1,4 +1,4 @@
-# Exercise 6
+# Exercise 7
 
 [https://github.com/t4d-classes/react-typescript_01292020](https://github.com/t4d-classes/react-typescript_01292020)
 
