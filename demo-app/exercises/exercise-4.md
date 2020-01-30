@@ -11,4 +11,3 @@
 3. Display the cars in the table.
 
 4. Ensure it works.
-
