@@ -28,7 +28,7 @@ export const CarTool: FC<CarToolProps> = (props) => {
   const [ carForm, setCarForm ] = useState(initialCarForm());
   const [ cars, setCars ] = useState(props.cars.concat());
 
-  const change = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const change: (e: React.ChangeEvent<HTMLInputElement>) => void = (e) => {
     setCarForm({
       ...carForm,
       [ e.target.name ]: e.target.value,
