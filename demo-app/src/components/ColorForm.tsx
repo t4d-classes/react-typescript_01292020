@@ -42,7 +42,7 @@ export const ColorForm: FC<ColorFormProps> = (props) => {
     <div>
       <label htmlFor="name-input">Name</label>
       <input type="text" id="name-input" value={colorForm.name}
-        name="name" onChange={change} />
+        name="name" onChange={change}/>
     </div>
     <div>
       <label htmlFor="hexcode-input">Hexcode</label>

@@ -16,7 +16,9 @@
     "typescript": "^3.7.5"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "run-p web rest",
+    "rest": "json-server --port 3050 db.json",
+    "web": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -26,17 +28,19 @@
     "parserOptions": {
       "project": "./tsconfig.json"
     },
-    "plugins": ["@typescript-eslint"],
     "extends": [
       "react-app",
       "plugin:@typescript-eslint/eslint-recommended",
       "plugin:@typescript-eslint/recommended",
       "plugin:@typescript-eslint/recommended-requiring-type-checking"
     ],
+    "plugins": [
+      "@typescript-eslint"
+    ],
     "rules": {
       "@typescript-eslint/no-explicit-any": 0,
       "@typescript-eslint/explicit-function-return-type": 0,
-      "@typescript-eslint/no-inferrable-types": 2
+      "@typescript-eslint/no-inferrable-types": 1
     }
   },
   "browserslist": {
@@ -53,6 +57,8 @@
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "2.18.0",
-    "@typescript-eslint/parser": "2.18.0"
+    "@typescript-eslint/parser": "2.18.0",
+    "json-server": "0.15.1",
+    "npm-run-all": "4.1.5"
   }
 }

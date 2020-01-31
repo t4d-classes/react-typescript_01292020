@@ -5,6 +5,7 @@ import { Car } from '../models/car';
 interface CarFormProps {
   buttonText: string;
   onSubmitCar: (car: Car) => void;
+  ref: React.Ref<HTMLInputElement>;
 }
 
 interface CarFormState {
@@ -27,6 +28,8 @@ const initialCarForm: () => CarFormState = () => ({
 export const CarForm: FC<CarFormProps> = forwardRef<HTMLInputElement, CarFormProps>((props, ref) => {
 
 
+
+
   const [ carForm, setCarForm ] = useState(initialCarForm());
 
   const change: (e: React.ChangeEvent<HTMLInputElement>) => void = (e) => {
@@ -45,7 +48,8 @@ export const CarForm: FC<CarFormProps> = forwardRef<HTMLInputElement, CarFormPro
     <form>
       <div>
         <label htmlFor="make-input">Make</label>
-        <input type="text" id="make-input" value={carForm.make} name="make" onChange={change} />
+        <input type="text" id="make-input" value={carForm.make}
+          name="make" onChange={change} ref={ref} />
       </div>
       <div>
         <label htmlFor="model-input">Model</label>

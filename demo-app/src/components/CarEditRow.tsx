@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { Component, createRef } from 'react';
 
 import { Car } from '../models/car';
 
@@ -25,36 +25,54 @@ const getInitialCarEditRowState: (car: Car) => CarEditRowState = (car: Car) => (
   price: car.price,
 })
 
-export const CarEditRow: FC<CarEditRowProps> = (props) =>  {
+export class CarEditRow extends Component<CarEditRowProps, CarEditRowState> {
 
+  defaultControlRef = createRef<HTMLInputElement>();
 
-  const [ carForm, setCarForm ] = useState(getInitialCarEditRowState(props.car));
+  constructor(props: CarEditRowProps) {
+    super(props);
 
-  const change = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCarForm({
-      ...carForm,
+    this.state = getInitialCarEditRowState(props.car);
+  }
+
+  componentDidMount() {
+    if (this.defaultControlRef.current) {
+      this.defaultControlRef.current.focus();
+    }
+
+  }
+
+  change = (e: React.ChangeEvent<HTMLInputElement>) => {
+    this.setState({
       [ e.target.name ]: e.target.type === 'number' ? Number(e.target.value) : e.target.value,
     });
   }
 
-  const saveCar = () => {
-    props.onSaveCar({
-      ...carForm,
-      id: props.car.id,
+  saveCar = () => {
+    this.props.onSaveCar({
+      ...this.state,
+      id: this.props.car.id,
     });
   }
 
-  return <tr>
-    <td>{props.car.id}</td>
-    <td><input type="text" id="edit-make-input" value={carForm.make} name="make" onChange={change} /></td>
-    <td><input type="text" id="edit-model-input" value={carForm.model} name="model" onChange={change} /></td>
-    <td><input type="number" id="edit-year-input" value={carForm.year} name="year" onChange={change} /></td>
-    <td><input type="text" id="edit-color-input" value={carForm.color} name="color" onChange={change} /></td>
-    <td><input type="number" id="edit-price-input" value={carForm.price} name="price" onChange={change} /></td>
+  render() {
+
+    return <tr>
+    <td>{this.props.car.id}</td>
+    <td><input type="text" id="edit-make-input" value={this.state.make}
+      name="make" onChange={this.change} ref={this.defaultControlRef} /></td>
+    <td><input type="text" id="edit-model-input" value={this.state.model} name="model" onChange={this.change} /></td>
+    <td><input type="number" id="edit-year-input" value={this.state.year} name="year" onChange={this.change} /></td>
+    <td><input type="text" id="edit-color-input" value={this.state.color} name="color" onChange={this.change} /></td>
+    <td><input type="number" id="edit-price-input" value={this.state.price} name="price" onChange={this.change} /></td>
     <td>
-      <button type="button" onClick={saveCar}>Save</button>
-      <button type="button" onClick={props.onCancelCar}>Cancel</button>
+      <button type="button" onClick={this.saveCar}>Save</button>
+      <button type="button" onClick={this.props.onCancelCar}>Cancel</button>
     </td>
   </tr>;
 
-};
+
+
+  }
+
+}
